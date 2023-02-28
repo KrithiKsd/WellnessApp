@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "396934879287",
+    "project_id": "wellnessapp-e104e",
+    "storage_bucket": "wellnessapp-e104e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396934879287:android:277b2f4a6178da421647b2",
+        "android_client_info": {
+          "package_name": "com.example.wellnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396934879287-o9r2ntbh4naqmh112d8rdhrrv002mq51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyFM6mXvQradpSIpPzkbpTXQ3-0y_NcL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396934879287-o9r2ntbh4naqmh112d8rdhrrv002mq51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

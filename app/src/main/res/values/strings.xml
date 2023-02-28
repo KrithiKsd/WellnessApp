@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WellnessApp</string>
+
+    <string name="back_button">Back</string>
+    <string name="item_entry_title">Add Task</string>
+    <string name="welcome">Welcome</string>
+    <string name="preference_fact_type_key">fact_type_pref</string>
+
+
+</resources>
