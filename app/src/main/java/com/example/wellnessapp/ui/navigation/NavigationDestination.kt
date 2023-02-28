@@ -1,5 +1,10 @@
 package com.example.wellnessapp.ui.navigation
 
+/*
+* Filename: NavigationDestination.kt
+* Author: Krithika Kasaragod
+* */
+
 /**
  * Interface to describe the navigation destinations for the app
  */

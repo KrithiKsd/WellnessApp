@@ -1,35 +1,30 @@
 package com.example.wellnessapp
 
+/*
+* Filename: MainActivity.kt
+* Author: Krithika Kasaragod
+* */
+
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.compose.material.Surface
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.wellnessapp.ui.home.user
 import com.example.wellnessapp.ui.theme.WellnessAppTheme
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.IdpResponse
-import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -38,13 +33,18 @@ class MainActivity : ComponentActivity() {
 
     var user: FirebaseUser? = null
     var isLoggedIn: MutableState<Boolean>? =null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel by viewModels<LoginViewModel>()
+
+        FirebaseAuth.getInstance().addAuthStateListener { firebaseAuth ->
+            val currentUser = firebaseAuth.currentUser
+            isLoggedIn!!.value = currentUser != null
+        }
+
         setContent {
 
-            //WellnessApp()
-            isLoggedIn= remember { mutableStateOf(false) }
+            isLoggedIn= rememberSaveable {mutableStateOf(false)}
 
             WellnessAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -57,9 +57,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         if (isLoggedIn!!.value) {
                             Text(
-                                "${FirebaseAuth.getInstance().currentUser?.displayName}!",
-                                 //getFactWithPersonalization(viewModel.getFactToDisplay(context = applicationContext)),
-                                style = MaterialTheme.typography.h4,
+                                "Welcome "+"${FirebaseAuth.getInstance().currentUser?.displayName}!",
+                                style = MaterialTheme.typography.h5,
                             )
                             Spacer(modifier = Modifier.padding(bottom = 16.dp))
                             Button(onClick = {
@@ -68,10 +67,11 @@ class MainActivity : ComponentActivity() {
                             }, Modifier.padding(top = 8.dp)) {
                                 Text("Logout")
                             }
+                             WellnessApp()
                         }else{
                             Text(
-                                "Welcome",
-                                style = MaterialTheme.typography.h4,
+                                "Welcome to Wellness App",
+                                style = MaterialTheme.typography.h5,
                             )
                             Spacer(modifier = Modifier.padding(bottom = 16.dp))
                             Button(onClick = {
@@ -79,11 +79,19 @@ class MainActivity : ComponentActivity() {
                             }, Modifier.padding(top = 8.dp)) {
                                 Text("Login")
                             }
+
+                            Spacer(modifier = Modifier.padding(bottom = 16.dp))
+
                         }
                     }
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        FirebaseAuth.getInstance().removeAuthStateListener { }
     }
 
     @SuppressLint("StringFormatInvalid")

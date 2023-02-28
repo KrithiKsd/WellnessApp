@@ -1,6 +1,10 @@
 
-
 package com.example.wellnessapp.ui.task
+
+/*
+* Filename: TaskUIState.kt
+* Author: Krithika Kasaragod
+* */
 
 import com.example.wellnessapp.data.Task
 
@@ -12,8 +16,6 @@ data class ItemUiState(
     val id: Int = 0,
     val name: String = "",
     val isDone:Boolean = false,
-    /*val price: String = "",
-    val quantity: String = "",*/
     val actionEnabled: Boolean = false
 )
 
@@ -26,8 +28,6 @@ fun ItemUiState.toItem(): Task = Task(
     id = id,
     name = name,
     isDone= false
-    /*price = price.toDoubleOrNull() ?: 0.0,
-    quantity = quantity.toIntOrNull() ?: 0*/
 )
 
 /**
@@ -37,12 +37,9 @@ fun Task.toItemUiState(actionEnabled: Boolean = false): ItemUiState = ItemUiStat
     id = id,
     name = name,
     isDone=isDone,
-  /*  price = price.toString(),
-    quantity = quantity.toString(),*/
     actionEnabled = actionEnabled
 )
 
 fun ItemUiState.isValid() : Boolean {
-   // return name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
     return name.isNotBlank()
  }

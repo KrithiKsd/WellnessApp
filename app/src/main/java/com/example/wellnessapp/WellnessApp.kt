@@ -1,14 +1,12 @@
 package com.example.wellnessapp
 
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+/*
+* Filename: WellnessApp.kt
+* Author: Krithika Kasaragod
+* */
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.wellnessapp.ui.navigation.WellnessNavHost
@@ -24,7 +22,7 @@ fun WellnessTopAppBar(
     modifier: Modifier = Modifier,
     navigateUp: () -> Unit = {}
 ) {
-    if (canNavigateBack) {
+    /*if (canNavigateBack) {
         TopAppBar(
             title = { Text(title) },
             modifier = modifier,
@@ -39,5 +37,5 @@ fun WellnessTopAppBar(
         )
     } else {
         TopAppBar(title = { Text(title) }, modifier = modifier)
-    }
+    }*/
 }

@@ -1,11 +1,14 @@
 
 package com.example.wellnessapp.ui.task
 
+/*
+* Filename: TaskEntryScreen.kt
+* Author: Krithika Kasaragod
+* */
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
@@ -14,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -25,7 +27,6 @@ import com.example.wellnessapp.ui.navigation.NavigationDestination
 import com.example.wellnessapp.ui.theme.WellnessAppTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 object TaskEntryDestination : NavigationDestination {
     override val route = "item_entry"
@@ -119,8 +120,6 @@ private fun ItemEntryScreenPreview() {
         ItemEntryBody(
             itemUiState = ItemUiState(
                 name = "Item name"
-               /* price = "10.00",
-                quantity = "5"*/
             ),
             onItemValueChange = {},
             onSaveClick = {}

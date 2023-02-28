@@ -1,4 +1,8 @@
 package com.example.wellnessapp.data
+/*
+* Filename: TaskDao.kt
+* Author: Krithika Kasaragod
+* */
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +22,7 @@ interface ItemDao {
     @Query("SELECT * from items WHERE id = :id")
     fun getItem(id: Int): Flow<Task>
 
-    @Query("SELECT * from items ORDER BY name ASC")
+    @Query("SELECT * from items")
     fun getAllItems(): Flow<List<Task>>
 
 }

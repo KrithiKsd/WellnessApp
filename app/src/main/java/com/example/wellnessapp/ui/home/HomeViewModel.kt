@@ -1,39 +1,63 @@
 
 package com.example.wellnessapp.ui.home
+/*
+* Filename: HomeViewModel.kt
+* Author: Krithika Kasaragod
+* */
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wellnessapp.data.Task
 import com.example.wellnessapp.data.TasksRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-
-/**
- * View Model to retrieve all items in the Room database.
- */
-class HomeViewModel(itemsRepository: TasksRepository) : ViewModel() {
-   /* val homeUiState: StateFlow<HomeUiState> =
-    itemsRepository.getAllItemsStream().map { HomeUiState(it) }*/
-   val homeUiState: StateFlow<HomeUiState> =
-       itemsRepository.getAllItemsStream().map { HomeUiState(it) }
-           .stateIn(
-               scope = viewModelScope,
-               started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-               initialValue = HomeUiState()
-           )
-
-    companion object {
-        private const val TIMEOUT_MILLIS = 5_000L
-    }
-
-    
-}
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Ui State for HomeScreen
  */
 data class HomeUiState(val itemList: List<Task> = listOf())
 
+class HomeViewModel(private val itemsRepository: TasksRepository) : ViewModel() {
 
-/*suspend fun deleteItem() {
-    itemsRepository.deleteItem(uiState.value.toItem())
-}*/
+    private val _homeUiState = MutableStateFlow(HomeUiState())
+    val homeUiState: StateFlow<HomeUiState> = _homeUiState
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("HomeViewModel", "Error deleting item", throwable)
+    }
+
+    init {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            itemsRepository.getAllItemsStream()
+                .map { itemList -> HomeUiState(itemList) }
+                .stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(5000),
+                    initialValue = HomeUiState()
+                )
+                .collect { uiState ->
+                    _homeUiState.value = uiState
+                }
+        }
+    }
+
+    fun deleteItem(item: Task) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            withContext(Dispatchers.IO) {
+                itemsRepository.deleteItem(item)
+            }
+        }
+    }
+    fun updateItem(item: Task) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            withContext(Dispatchers.IO) {
+                itemsRepository.updateItem(item)
+            }
+        }
+    }
+
+}

@@ -7,4 +7,23 @@
     <string name="preference_fact_type_key">fact_type_pref</string>
 
 
+
+    <string name="attention">Attention</string>
+
+    <string name="delete">Delete</string>
+    <string name="delete_question">Are you sure you want to delete?</string>
+    <string name="no_item_description">There are no new tasks!</string>
+    <string name="edit_item_title">Edit Item</string>
+    <string name="item">Item</string>
+    <string name="item_detail_title">Task Details</string>
+    <string name="item_name_req">Task Name *</string>
+    <string name="no">No</string>
+    <string name="price">Price</string>
+    <string name="quantity_in_stock">Quantity\nIn Stock</string>
+    <string name="quantity_req">Quantity in Stock *</string>
+    <string name="save_action">Save</string>
+    <string name="sell">Sell</string>
+    <string name="yes">Yes</string>
+
+
 </resources>
